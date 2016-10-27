@@ -1,6 +1,6 @@
 ### Data, data everywhere!
 
-**Data** is immaterial and untangible, so it's described with [metaphors](http://dismagazine.com/discussion/73298/sara-m-watson-metaphors-of-big-data). Yet those metaphors are extractivist and industrial, pushed by those who control *big data*, rather than those who produce the *small data* every day. 
+**Data** is immaterial and untangible, so it's described with [metaphors](http://dismagazine.com/discussion/73298/sara-m-watson-metaphors-of-big-data). Yet those metaphors are extractivist and industrial, pushed by those who control *big data*, rather than those who produce *small data* every day. 
 
 Can we frame our relationship with data through different metaphors? 
 
