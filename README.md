@@ -1,20 +1,25 @@
-**Data** is being described with [various metaphors](http://dismagazine.com/discussion/73298/sara-m-watson-metaphors-of-big-data) these days.
+### Data, data everywhere!
 
-Let's explore new, non-technocratic metaphors to frame our relationship with data. 
+**Data** is immaterial and untangible, so it's described with [metaphors](http://dismagazine.com/discussion/73298/sara-m-watson-metaphors-of-big-data). Yet those metaphors are extractivist and industrial, pushed by those who control *big data*, rather than those who produce *small data* every day. 
 
-To spark your imagination, new metaphors are deployed to your brain via *emojis* + famous *mis-quotes*.
+Can we frame our relationship with data through different metaphors? 
+
+To spark your imagination, new metaphors are deployed to your Twitter feed via *emojis* + famous *mis-quotes*.
 
 For example:
 
-> #Data is the new 🎅
+```
+#Data is the new 🎅
+"Data has the right idea - visit people only once a year"
+```
 
-> "Data has the right idea - visit people only once a year"
+## :hatching_chick: [@dataphors](https://twitter.com/@dataphors)
 
 ### Where is the data coming from?
 
 Emoji data from [Unicode](http://www.unicode.org/emoji/charts/emoji-list.html)
 
-Quotes data from [BrainyQuote](http://www.brainyquote.com), [GoodReads](https://www.goodreads.com/quotes), ~[WikiQuotes](https://en.wikiquote.org/wiki/Main_Page),~ [Sun-Tzu quotes](https://github.com/mattdesl/sun-tzu-quotes/blob/master/quotes.json) and [Corpora](https://github.com/dariusk/corpora/blob/master/data/words/literature/shakespeare_phrases.json)
+Quotes data from [BrainyQuote](http://www.brainyquote.com), [GoodReads](https://www.goodreads.com/quotes), ~~[WikiQuotes](https://en.wikiquote.org/wiki/Main_Page),~~ [Sun-Tzu quotes](https://github.com/mattdesl/sun-tzu-quotes/blob/master/quotes.json) and [Corpora](https://github.com/dariusk/corpora/blob/master/data/words/literature/shakespeare_phrases.json)
 
 Mined with [Kimono](https://www.kimonolabs.com/) and Node.js
 
