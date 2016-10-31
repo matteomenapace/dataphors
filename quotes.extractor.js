@@ -1,22 +1,24 @@
 var argv = require('minimist')(process.argv.slice(2)),
     testMode = argv.test || false,
-    fileName = testMode ? 'quotes.test.json' : 'quotes.raw.json',
+    fileNames = testMode ? ['quotes.test.json'] : ['quotes.brainyquote.raw.json', 'quotes.goodreads.raw.json'],
     jsonfile = require('jsonfile'),
-    json = jsonfile.readFileSync(fileName),
-    quotes = json.results.quotes,
     quotesMap = {},
     query = '',
-    maxLength = 118
-
-// brainyquote, goodreads    
+    maxLength = 83 // 118 // 118 characters (that's `#Data is the new 🎅` + `\n` + `""`) 
 
 // to run this in testMode
 // node quotes.extractor.js --test
 
-// loop through all quotes
-quotes.forEach(function(quote)
+fileNames.forEach(function(fileName)
 {
-  parseQuote(quote)
+  var json = jsonfile.readFileSync(fileName),
+      quotes = json.results.quotes
+
+  // loop through all quotes
+  quotes.forEach(function(quote)
+  {
+    parseQuote(quote)
+  })
 })
 
 function parseQuote(quote)
@@ -30,7 +32,7 @@ function parseQuote(quote)
   }
 
   // assign query in case the quote is missing it
-  if (quote.query) query = quote.query.toLowerCase()
+  if (quote.query) query = quote.query.replace('Quotes About ','').toLowerCase()
   quote.query = query
   
   // sanitise the quote text
@@ -80,7 +82,7 @@ function parseSentence(sentence)
   misQuote = misQuote.trim()
   misQuote = misQuote.charAt(0).toUpperCase() + misQuote.substring(1)
 
-  // don't bother if mis-quote is longer than 118 characters (that's `#Data is the new 🎅` + `\n` + `""`)
+  // don't bother if mis-quote is longer than maxLength
   if (misQuote.length > maxLength) return
 
   // console.log(misQuote.length + ' ' + quote.query + ' > ' + misQuote)
