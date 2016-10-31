@@ -31,12 +31,13 @@ Mined with [Kimono](https://www.kimonolabs.com/) and Node.js
 
   For each quote:
 
-  * Split `text` into sentences (`.?!`)
-  * If a sentence is longer than 118 characters (that's `#Data is the new 🎅` + `\n` + `""`), filter it out 
-  * ~If the `query` (e.g. `Santa`, `face` or `cool`) is used as a *verb* in the sentence, filter it out~ (maybe with https://www.npmjs.com/package/node-stanford-postagger?)
-  * Create the mis-quote by replacing `query` with `data` in the sentence
+  * [x] Split `text` into sentences (`.?!`)
+  * [x] If a sentence is longer than 118 characters (that's `#Data is the new 🎅` + `\n` + `""`), filter it out 
+  * [ ] If the `query` (e.g. `Santa`, `face` or `cool`) is used as a *verb* in the sentence, filter it out (maybe with https://www.npmjs.com/package/node-stanford-postagger?)
+  * [x] Create the mis-quote by replacing `query` with `data` in the sentence
   * [ ] Check for both plural and singular of `query` (eg: `eyes` and `eye`)
-  * Add the mis-quote to the map object, with key set as `query`
+  * [ ] Check for past tense of verbs in `query` (eg: `love` and `loved`)
+  * [x] Add the mis-quote to the map object, with key set as `query`
 
 - [x] Generating Tracery grammar, combining emojis and quotes
 
