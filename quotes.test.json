@@ -65,7 +65,7 @@
         "testCase": "testing capital"
       },
       {
-        "text":"All people should learn to say as well and \"No\" as an answer not only \"Yes\"",
+        "text":"All people should “learn” to say \"No\" as an answer not only \"Yes\"",
         "testCase": "testing datat",
         "query":"no"
       },

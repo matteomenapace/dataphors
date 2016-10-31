@@ -75,6 +75,9 @@ function parseSentence(sentence)
   misQuote = misQuote.replace(/\b(a data)\b/gm, 'data')
   misQuote = misQuote.replace(/\b(a Data)\b/gm, 'Data')
 
+  // “ ” " '
+  misQuote = misQuote.replace(/["“”]/gm, '\'')
+
   // commas ',' are special characters in Tracery grammars, dang!
   // using workaround https://github.com/galaxykate/tracery/issues/20 
   regex = new RegExp('(,)', 'gi')

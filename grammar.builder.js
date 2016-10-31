@@ -4,7 +4,7 @@ var jsonfile = require('jsonfile'),
     grammar = 
     {
       "origin": ["#[#setKeyword#]tweet#"],
-      "tweet": ["\\#Data is the new #emoji#\n\"#quote#\""],
+      "tweet": ["\\#Data is the new #emoji#\n“#quote#”"],
       "setKeyword":
       [
         // "[keyword:alphabet][emoji:🅰,🆎,🔤,🔡][quote:My data starts where your data ends!,Thou whoreson data. Thou unnecessary data!,And when I can't fall asleep I play what I call the data game]",
