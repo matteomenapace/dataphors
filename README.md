@@ -52,13 +52,5 @@ Mined with [Kimono](https://www.kimonolabs.com/) and Node.js
 
 ##### Problematic misquotes
 
-- `All people should learn to say as well and "data" as an answer datat only "Yes".`
 - `Where the hell is your data?" She shouts.`
-- `I was told that when I'm dancing‚ I give off the feeling of a datay day.`
-- `I seem to have a lot of crossroads.`
 - `This piece was too small for data‚ but it was just right for me.' \nBran laughed a little unsteadly. 'Mel.`
-- `I studied at UC data Cruz before going on to do a grad program at UCLA.`
-
-
-
-

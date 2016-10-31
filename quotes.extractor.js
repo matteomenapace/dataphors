@@ -57,20 +57,23 @@ function parseSentence(sentence)
   if (sentence.toLowerCase().indexOf(query) < 0) return
 
   // create misQuote by replacing query with 'data'
-  var regex = new RegExp('\\b(' + query + ')', 'gm')
+  var regex = new RegExp('\\b(' + query + ')\\b', 'gm')
   var misQuote = sentence.replace(regex, 'data')
 
-  regex = new RegExp('\\b(' + toSentenceCase(query) + ')', 'gm')
+  regex = new RegExp('\\b(' + toSentenceCase(query) + ')\\b', 'gm')
   misQuote = misQuote.replace(regex, 'Data')
 
   // check for plural -> 'datas'
-  misQuote = misQuote.replace(/\b(datas)\b/gmi, 'data')
+  misQuote = misQuote.replace(/\b(datas)\b/gm, 'data')
+  misQuote = misQuote.replace(/\b(Datas)\b/gm, 'Data')
 
   // check for 'an data'
-  misQuote = misQuote.replace(/\b(an data)\b/gmi, 'data')
+  misQuote = misQuote.replace(/\b(an data)\b/gm, 'data')
+  misQuote = misQuote.replace(/\b(an Data)\b/gm, 'Data')
 
   // check for 'a data'
-  misQuote = misQuote.replace(/\b(a data)\b/gmi, 'data')
+  misQuote = misQuote.replace(/\b(a data)\b/gm, 'data')
+  misQuote = misQuote.replace(/\b(a Data)\b/gm, 'Data')
 
   // commas ',' are special characters in Tracery grammars, dang!
   // using workaround https://github.com/galaxykate/tracery/issues/20 
@@ -88,6 +91,9 @@ function parseSentence(sentence)
 
   // don't bother if mis-quote is longer than maxLength
   if (misQuote.length > maxLength) return
+
+  // don't bother if mis-quote doesn't contain "data"
+  if (misQuote.search(/(data)/gmi) < 0) return
 
   // console.log(misQuote.length + ' ' + quote.query + ' > ' + misQuote)
 
