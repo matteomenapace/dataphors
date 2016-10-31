@@ -19,7 +19,7 @@ var container = document.getElementById('editor'),
     editor = new JSONEditor(container, options)
 
 // get json, setup editor and generate
-$.getJSON('grammar.json', function(json) 
+$.getJSON('data/grammar.json', function(json) 
 {
     editor.set(json)
     generate()

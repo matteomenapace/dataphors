@@ -1,6 +1,7 @@
 var jsonfile = require('jsonfile'),
-    emojisMap = jsonfile.readFileSync('emojis.map.curated.json'),
-    quotesMap = jsonfile.readFileSync('quotes.map.json'),
+    folder = '../data/',
+    emojisMap = jsonfile.readFileSync(folder + 'emojis.map.curated.json'),
+    quotesMap = jsonfile.readFileSync(folder + 'quotes.map.json'),
     grammar = 
     {
       "origin": ["#[#setKeyword#]tweet#"],
@@ -56,4 +57,4 @@ for (var keyword in emojisMap)
 
 
 // save to json
-jsonfile.writeFileSync('grammar.json', grammar, {spaces: 2})
+jsonfile.writeFileSync(folder + 'grammar.json', grammar, {spaces: 2})
