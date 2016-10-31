@@ -11,12 +11,9 @@
     "quotes":
     [
       {
-        "text":"Although I still have a long way to go, I would like to become the pride of Rain. When another Asian artist enters the U.S. rain. I would like him to think, 'There was an artist called Rain who succeeded in the U.S. market.",
+        "text":"Although I still have a long way to go, I would like to become the pride of Rain. When another Asian artist enters the U.S. rain, I would like him to think, 'There was an artist called Rain who succeeded in the U.S. market.",
         "query":"rain",
         "testCase": "testing sentence split"
-      },
-      {
-        "text":"I was told that when I'm dancing‚ I give off the feeling of a rainy day"
       },
       {
         "text":"If you keep your face to the sunshine, you cannot see a shadow.",
@@ -50,6 +47,32 @@
       {
         "text":"Interfaces you know and faces you'd rather not...",
         "testCase": "testing plural replacement"
+      },
+      {
+        "text":"Where the hell is your face?\" She shouts.",
+        "testCase": "testing double-quotes"
+      },
+      {
+        "text":"I seem to have a lot of crossroads.",
+        "testCase": "testing bah"
+      },
+      {
+        "text":"This piece was too small for face‚ but it was just right for me.' \nBran laughed a little unsteadly. 'Mel.",
+        "testCase": "testing single quotes"
+      },
+      {
+        "text":"I studied at UC Face Cruz before going on to do a grad program at UCLA.",
+        "testCase": "testing capital"
+      },
+      {
+        "text":"All people should learn to say as well and \"No\" as an answer not only \"Yes\"",
+        "testCase": "testing datat",
+        "query":"no"
+      },
+      {
+        "text":"I was told that when I'm dancing‚ I give off the feeling of a rainy day",
+        "query":"rain",
+        "testCase": "testing datay"
       }
     ]
   }
