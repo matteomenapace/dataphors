@@ -1,4 +1,5 @@
-var argv = require('minimist')(process.argv.slice(2)),
+var clear = require('clear')(), // clear the console
+    argv = require('minimist')(process.argv.slice(2)),
     testMode = argv.test || false,
     fileNames = testMode ? ['quotes.test.json'] : ['quotes.brainyquote.raw.json', 'quotes.goodreads.raw.json'],
     jsonfile = require('jsonfile'),
@@ -56,8 +57,11 @@ function parseSentence(sentence)
   if (sentence.toLowerCase().indexOf(query) < 0) return
 
   // create misQuote by replacing query with 'data'
-  var regex = new RegExp('\\b(' + query + ')', 'gmi')
+  var regex = new RegExp('\\b(' + query + ')', 'gm')
   var misQuote = sentence.replace(regex, 'data')
+
+  regex = new RegExp('\\b(' + toSentenceCase(query) + ')', 'gm')
+  misQuote = misQuote.replace(regex, 'Data')
 
   // check for plural -> 'datas'
   misQuote = misQuote.replace(/\b(datas)\b/gmi, 'data')
@@ -80,7 +84,7 @@ function parseSentence(sentence)
 
   // trim + SentenceCase
   misQuote = misQuote.trim()
-  misQuote = misQuote.charAt(0).toUpperCase() + misQuote.substring(1)
+  misQuote = toSentenceCase(misQuote)
 
   // don't bother if mis-quote is longer than maxLength
   if (misQuote.length > maxLength) return
@@ -88,6 +92,11 @@ function parseSentence(sentence)
   // console.log(misQuote.length + ' ' + quote.query + ' > ' + misQuote)
 
   addToQuotesMap(query, misQuote)
+}
+
+function toSentenceCase(string)
+{
+  return string.charAt(0).toUpperCase() + string.substring(1)
 }
 
 function addToQuotesMap(key, value)
