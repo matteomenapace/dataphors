@@ -45,7 +45,7 @@ Mined with [Kimono](https://www.kimonolabs.com/) and Node.js
 
 - [ ] Add wildcard quotes from Shakespeare and Sun-Tzu
 
-- [ ] Experiment: keep only the shortest mis-quotes
+- [x] Experiment: keep only the shorter mis-quotes
 
 - [ ] Experiment: include original quote authors?
 
