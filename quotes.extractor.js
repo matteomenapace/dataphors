@@ -1,13 +1,15 @@
-var testMode = false,
-    jsonfile = require('jsonfile'),
+var argv = require('minimist')(process.argv.slice(2)),
+    testMode = argv.test || false,
     fileName = testMode ? 'quotes.test.json' : 'quotes.raw.json',
+    jsonfile = require('jsonfile'),
     json = jsonfile.readFileSync(fileName),
     quotes = json.results.quotes,
     quotesMap = {},
     query = '',
     maxLength = 118
 
-// console.log(quotes)
+// to run this in testMode
+// node quotes.extractor.js --test
 
 // loop through all quotes
 quotes.forEach(function(quote)
