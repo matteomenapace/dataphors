@@ -8,11 +8,18 @@ var argv = require('minimist')(process.argv.slice(2)),
     query = '',
     maxLength = 118
 
+// brainyquote, goodreads    
+
 // to run this in testMode
 // node quotes.extractor.js --test
 
 // loop through all quotes
 quotes.forEach(function(quote)
+{
+  parseQuote(quote)
+})
+
+function parseQuote(quote)
 {
   // replace \n in keywords
   if (quote.keywords)
@@ -37,44 +44,49 @@ quotes.forEach(function(quote)
 
   sentences.forEach(function(sentence)
   {
-    // don't bother if the sentece doesn't contain the query
-    if (sentence.toLowerCase().indexOf(query) < 0) return
-
-    // create misQuote by replacing query with 'data'
-    var regex = new RegExp('\\b(' + query + ')', 'gmi')
-    var misQuote = sentence.replace(regex, 'data')
-
-    // check for plural -> 'datas'
-    misQuote = misQuote.replace(/\b(datas)\b/gmi, 'data')
-
-    // check for 'an data'
-    misQuote = misQuote.replace(/\b(an data)\b/gmi, 'data')
-
-    // check for 'a data'
-    misQuote = misQuote.replace(/\b(a data)\b/gmi, 'data')
-
-    // commas ',' are special characters in Tracery grammars, dang!
-    // using workaround https://github.com/galaxykate/tracery/issues/20 
-    regex = new RegExp('(,)', 'gi')
-    misQuote = misQuote.replace(regex, '‚')
-
-    // colons are also special characters in Tracery grammars: dang!
-    regex = new RegExp('(: )', 'gi')
-    misQuote = misQuote.replace(regex, '：')
-    // trying FULLWIDTH COLON Unicode: U+FF1A, UTF-8: EF BC 9A
-
-    // trim + SentenceCase
-    misQuote = misQuote.trim()
-    misQuote = misQuote.charAt(0).toUpperCase() + misQuote.substring(1)
-
-    // don't bother if mis-quote is longer than 118 characters (that's `#Data is the new 🎅` + `\n` + `""`)
-    if (misQuote.length > maxLength) return
-
-    // console.log(misQuote.length + ' ' + quote.query + ' > ' + misQuote)
-
-    addToQuotesMap(query, misQuote)
+    parseSentence(sentence)
   })
-})
+}
+
+function parseSentence(sentence)
+{
+  // don't bother if the sentece doesn't contain the query
+  if (sentence.toLowerCase().indexOf(query) < 0) return
+
+  // create misQuote by replacing query with 'data'
+  var regex = new RegExp('\\b(' + query + ')', 'gmi')
+  var misQuote = sentence.replace(regex, 'data')
+
+  // check for plural -> 'datas'
+  misQuote = misQuote.replace(/\b(datas)\b/gmi, 'data')
+
+  // check for 'an data'
+  misQuote = misQuote.replace(/\b(an data)\b/gmi, 'data')
+
+  // check for 'a data'
+  misQuote = misQuote.replace(/\b(a data)\b/gmi, 'data')
+
+  // commas ',' are special characters in Tracery grammars, dang!
+  // using workaround https://github.com/galaxykate/tracery/issues/20 
+  regex = new RegExp('(,)', 'gi')
+  misQuote = misQuote.replace(regex, '‚')
+
+  // colons are also special characters in Tracery grammars: dang!
+  regex = new RegExp('(: )', 'gi')
+  misQuote = misQuote.replace(regex, '：')
+  // trying FULLWIDTH COLON Unicode: U+FF1A, UTF-8: EF BC 9A
+
+  // trim + SentenceCase
+  misQuote = misQuote.trim()
+  misQuote = misQuote.charAt(0).toUpperCase() + misQuote.substring(1)
+
+  // don't bother if mis-quote is longer than 118 characters (that's `#Data is the new 🎅` + `\n` + `""`)
+  if (misQuote.length > maxLength) return
+
+  // console.log(misQuote.length + ' ' + quote.query + ' > ' + misQuote)
+
+  addToQuotesMap(query, misQuote)
+}
 
 function addToQuotesMap(key, value)
 {
