@@ -1,15 +1,15 @@
 var clear = require('clear')(), // clear the console
     argv = require('minimist')(process.argv.slice(2)),
     testMode = argv.test || false,
-    fileNames = testMode ? ['quotes.test.json'] : ['quotes.brainyquote.raw.json', 'quotes.goodreads.raw.json'],
+    fileNames = testMode ? ['quotes.test.annotated.json'] : ['quotes.goodreads.annotated.json'],
     folder = '../data/',
     jsonfile = require('jsonfile'),
     quotesMap = {},
     query = '',
-    maxLength = 83 // 118 // 118 characters (that's `#Data is the new 🎅` + `\n` + `""`) 
+    maxLength = 115 // 115 characters (that's 140 - `#Data is the new 🎅` + `\n` + `“”` + `\n- `) 
 
 // to run this in testMode
-// node quotes.extractor.js --test
+// node quotesExtractor.js --test
 
 fileNames.forEach(function(fileName)
 {
@@ -25,83 +25,143 @@ fileNames.forEach(function(fileName)
 
 function parseQuote(quote)
 {
-  // replace \n in keywords
-  if (quote.keywords)
-  {
-    var keywords = quote.keywords
-    keywords = keywords.replace(/(?:\r\n|\r|\n)/g,'')
-    quote.keywords = keywords.toLowerCase()
-  }
-
   // assign query in case the quote is missing it
-  if (quote.query) query = quote.query.replace('Quotes About ','').toLowerCase()
+  if (quote.query)
+  {
+    query = quote.query.replace('Quotes About ','') // from GoodReads
+    query = query.toLowerCase()
+  }
   quote.query = query
-  
-  // sanitise the quote text
-  var text = quote.text
-  text = text.replace(/(U\.S\.)/gmi, 'US') // U.S. > US
 
-  // split the text into sentences
+  // don't bother if text doesn't contain query
+  var regex = new RegExp(query, 'gmi')
+  if (quote.text.search(regex) < 0) return
+  
+  // generate misquote
+  var misquote = generateMisquote(quote)
+
+  // sanitise 
+  misquote = sanitise(misquote)
+
+  // add quote marks
+  misquote = '“' + misquote + '”' 
+    
+  // add author
+  misquote += '\\\n- ' + quote.author
+  
+
+  // don't bother if misquote is longer than maxLength
+  if (misquote.length > maxLength) return
+
+  // don't bother if misquote doesn't contain "data"
+  if (misquote.search(/(data)/gmi) < 0) return
+
+  // console.log(misquote.length + ' ' + quote.query + ' > ' + misquote)
+
+  addToQuotesMap(query, misquote)
+
+  /*
+  // split misquote into sentences
   // http://stackoverflow.com/a/18914855/2928562
-  var sentences = text.replace(/([.?!])\s*(?=[A-Z])/g, '$1|').split('|')
+  var sentences = misquote.replace(/([.?!])\s*(?=[A-Z])/g, '$1|').split('|')
   // console.log(sentences)
 
   sentences.forEach(function(sentence)
   {
-    parseSentence(sentence)
-  })
+    var misquote = '“' + sentence + '”' 
+    
+    // add author
+    misquote += '\\\n- ' + quote.author
+    
+    // don't bother if misquote is longer than maxLength
+    if (misquote.length > maxLength) return
+
+    // don't bother if misquote doesn't contain "data"
+    if (misquote.search(/(data)/gmi) < 0) return
+
+    // console.log(misquote.length + ' ' + quote.query + ' > ' + misquote)
+
+    addToQuotesMap(query, misquote)
+  })*/
 }
 
-function parseSentence(sentence)
+function sanitise(string)
 {
-  // don't bother if the sentece doesn't contain the query
-  if (sentence.toLowerCase().indexOf(query) < 0) return
-
-  // create misQuote by replacing query with 'data'
-  var regex = new RegExp('\\b(' + query + ')\\b', 'gm')
-  var misQuote = sentence.replace(regex, 'data')
-
-  regex = new RegExp('\\b(' + toSentenceCase(query) + ')\\b', 'gm')
-  misQuote = misQuote.replace(regex, 'Data')
-
-  // check for plural -> 'datas'
-  misQuote = misQuote.replace(/\b(datas)\b/gm, 'data')
-  misQuote = misQuote.replace(/\b(Datas)\b/gm, 'Data')
-
-  // check for 'an data'
-  misQuote = misQuote.replace(/\b(an data)\b/gm, 'data')
-  misQuote = misQuote.replace(/\b(an Data)\b/gm, 'Data')
-
-  // check for 'a data'
-  misQuote = misQuote.replace(/\b(a data)\b/gm, 'data')
-  misQuote = misQuote.replace(/\b(a Data)\b/gm, 'Data')
+  // U.S. > US
+  string = string.replace(/(U\.S\.)/gmi, 'US') 
 
   // “ ” " '
-  misQuote = misQuote.replace(/["“”]/gm, '\'')
+  string = string.replace(/["“”]/gm, '\'')
 
   // commas ',' are special characters in Tracery grammars, dang!
   // using workaround https://github.com/galaxykate/tracery/issues/20 
   regex = new RegExp('(,)', 'gi')
-  misQuote = misQuote.replace(regex, '‚')
+  string = string.replace(regex, '‚')
 
   // colons are also special characters in Tracery grammars: dang!
   regex = new RegExp('(: )', 'gi')
-  misQuote = misQuote.replace(regex, '：')
-  // trying FULLWIDTH COLON Unicode: U+FF1A, UTF-8: EF BC 9A
+  string = string.replace(regex, '：')
+  // FULLWIDTH COLON Unicode: U+FF1A, UTF-8: EF BC 9A
+
+  return string
+}
+
+// generate misquote
+function generateMisquote(quote)
+{
+  var misquote = ''
+
+  console.log('\n' + quote.text)
+
+  // selectively replace query with 'data'
+
+    var lastIndex = 0,
+        regex = new RegExp('\\b(' + quote.query + ')\\b', 'gmi')
+    
+    // see http://stackoverflow.com/a/2295681/2928562
+    while ((match = regex.exec(quote.text)) != null) 
+    {
+      var index = match.index,
+          token = quote.tokens[index],
+          pos = (token) ? token.pos : undefined
+
+      console.log(quote.query + ' found at ' + index + ' > ' + pos)
+
+      // don't replace query if it'a VERB
+      if (pos == 'VERB')
+      {
+        misquote += quote.text.substring(lastIndex, index + quote.query.length)
+      }
+      else
+      {
+        misquote += quote.text.substring(lastIndex, index) + 'data'
+      } 
+      // update lastIndex
+      lastIndex = index + quote.query.length
+    }
+    // add the last bit of the quote
+    misquote += quote.text.substring(lastIndex)
+  
+
+  // check for plural -> 'datas'
+  misquote = misquote.replace(/\b(datas)\b/gm, 'data')
+  misquote = misquote.replace(/\b(Datas)\b/gm, 'Data')
+
+  // check for 'an data'
+  misquote = misquote.replace(/\b(an data)\b/gm, 'data')
+  misquote = misquote.replace(/\b(an Data)\b/gm, 'Data')
+
+  // check for 'a data'
+  misquote = misquote.replace(/\b(a data)\b/gm, 'data')
+  misquote = misquote.replace(/\b(a Data)\b/gm, 'Data')
 
   // trim + SentenceCase
-  misQuote = misQuote.trim()
-  misQuote = toSentenceCase(misQuote)
+  misquote = misquote.trim()
+  misquote = toSentenceCase(misquote)
 
-  // don't bother if mis-quote is longer than maxLength
-  if (misQuote.length > maxLength) return
+  // console.log(misquote)
 
-  // don't bother if mis-quote doesn't contain "data"
-  if (misQuote.search(/(data)/gmi) < 0) return
-
-  // console.log(misQuote.length + ' ' + quote.query + ' > ' + misQuote)
-
-  addToQuotesMap(query, misQuote)
+  return misquote
 }
 
 function toSentenceCase(string)
@@ -115,7 +175,9 @@ function addToQuotesMap(key, value)
   quotesMap[key].push(value)  
 }
 
-console.log(quotesMap)
+// console.log(quotesMap)
 
 // save to json
-jsonfile.writeFileSync(folder + 'quotes.map.json', quotesMap, {spaces: 2})
+var path = folder + 'quotes.map.json'
+jsonfile.writeFileSync(path, quotesMap, {spaces: 2})
+console.log('\nDone! ' + path)

@@ -6,7 +6,7 @@ var clear = require('clear')(), // clear the console
     grammar = 
     {
       "origin": ["#[#setKeyword#]tweet#"],
-      "tweet": ["\\#Data is the new #emoji#\n“#quote#”"],
+      "tweet": ["\\#Data is the new #emoji#\n#quote#"],
       "setKeyword":
       [
         // "[keyword:alphabet][emoji:🅰,🆎,🔤,🔡][quote:My data starts where your data ends!,Thou whoreson data. Thou unnecessary data!,And when I can't fall asleep I play what I call the data game]",
@@ -58,4 +58,6 @@ for (var keyword in emojisMap)
 
 
 // save to json
-jsonfile.writeFileSync(folder + 'grammar.json', grammar, {spaces: 2})
+var path = folder + 'grammar.json'
+jsonfile.writeFileSync(path, grammar, {spaces: 2})
+console.log('\nDone! ' + path)

@@ -19,7 +19,7 @@ For example:
 
 Emoji data from [Unicode](http://www.unicode.org/emoji/charts/emoji-list.html)
 
-Quotes data from [BrainyQuote](http://www.brainyquote.com), [GoodReads](https://www.goodreads.com/quotes), ~~[WikiQuotes](https://en.wikiquote.org/wiki/Main_Page),~~ [Sun-Tzu quotes](https://github.com/mattdesl/sun-tzu-quotes/blob/master/quotes.json) and [Corpora](https://github.com/dariusk/corpora/blob/master/data/words/literature/shakespeare_phrases.json)
+Quotes data from [BrainyQuote](http://www.brainyquote.com), [GoodReads](https://www.goodreads.com/quotes), ~~[WikiQuotes](https://en.wikiquote.org/wiki/Main_Page),~~ [Sun-Tzu quotes](https://github.com/mattdesl/sun-tzu-quotes/blob/master/quotes.json) and [Shakespeare quotes](https://github.com/dariusk/corpora/blob/master/data/words/literature/shakespeare_phrases.json)
 
 Mined with [Kimono](https://www.kimonolabs.com/) and Node.js
 
@@ -33,10 +33,10 @@ Mined with [Kimono](https://www.kimonolabs.com/) and Node.js
 
   * [x] Split `text` into sentences (`.?!`)
   * [x] If a sentence is longer than 118 characters (that's `#Data is the new 🎅` + `\n` + `""`), filter it out 
-  * [ ] If the `query` (e.g. `Santa`, `face` or `cool`) is used as a *verb* in the sentence, filter it out (maybe with https://www.npmjs.com/package/node-stanford-postagger?)
+  * [ ] If the `query` (e.g. `Santa`, `face` or `cool`) is used as a *verb* in the sentence, filter it out (maybe with https://www.npmjs.com/package/node-stanford-postagger or https://cloud.google.com/natural-language?)
   * [x] Create the mis-quote by replacing `query` with `data` in the sentence
-  * [ ] Check for both plural and singular of `query` (eg: `eyes` and `eye`)
-  * [ ] Check for past tense of verbs in `query` (eg: `love` and `loved`)
+  * [x] Check for both plural and singular of `query` (eg: `eyes` and `eye`)
+  * [x] Check for past tense of verbs in `query` (eg: `love` and `loved`)
   * [x] Add the mis-quote to the map object, with key set as `query`
 
 - [x] Generating Tracery grammar, combining emojis and quotes
@@ -47,7 +47,8 @@ Mined with [Kimono](https://www.kimonolabs.com/) and Node.js
 
 - [x] Experiment: keep only the shorter mis-quotes
 
-- [ ] Experiment: include original quote authors?
+- [x] Experiment: include original quote authors?
+  - [x] Need author from BrainyQuote
 
 - [ ] Experiment: hashtag one or more (key) words in the mis-quote? 
 

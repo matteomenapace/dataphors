@@ -1,13 +1,19 @@
 {
-  "name": "Data_is",
-  "version": "0.1.1",
-  "description": "Data is the new everything",
+  "name": "Dataphors",
+  "version": "0.1.2",
+  "description": "Data is the new everything...",
   "dependencies": {
+    "async": "^2.1.2",
     "clear": "0.0.1",
+    "google-cloud": "^0.43.0",
     "jsonfile": "^2.4.0",
     "minimist": "^1.2.0"
   },
   "devDependencies": {},
   "author": "matteomenapace",
-  "license": "CC-BY-NC-4.0"
+  "license": "CC-BY-NC-4.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/matteomenapace/dataphors.git"
+  }
 }
