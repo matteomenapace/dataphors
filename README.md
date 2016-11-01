@@ -10,7 +10,8 @@ For example:
 
 ```
 #Data is the new 🎅
-"Data has the right idea - visit people only once a year"
+“Data has the right idea: visit people only once a year”
+- Oscar Wilde
 ```
 
 ## :hatching_chick: [@dataphors](https://twitter.com/@dataphors)
@@ -31,12 +32,10 @@ Mined with [Kimono](https://www.kimonolabs.com/) and Node.js
 
   For each quote:
 
-  * [x] Split `text` into sentences (`.?!`)
-  * [x] If a sentence is longer than 118 characters (that's `#Data is the new 🎅` + `\n` + `""`), filter it out 
-  * [ ] If the `query` (e.g. `Santa`, `face` or `cool`) is used as a *verb* in the sentence, filter it out (maybe with https://www.npmjs.com/package/node-stanford-postagger or https://cloud.google.com/natural-language?)
-  * [x] Create the mis-quote by replacing `query` with `data` in the sentence
+  * [x] Create the mis-quote by [selectively](https://github.com/GoogleCloudPlatform/google-cloud-node#google-cloud-natural-language-beta) replacing `query` with `data` in the sentence
   * [x] Check for both plural and singular of `query` (eg: `eyes` and `eye`)
   * [x] Check for past tense of verbs in `query` (eg: `love` and `loved`)
+  * [x] If the misquote can't fit within a tweet, filter it out 
   * [x] Add the mis-quote to the map object, with key set as `query`
 
 - [x] Generating Tracery grammar, combining emojis and quotes
