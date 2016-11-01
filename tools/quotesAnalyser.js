@@ -3,7 +3,7 @@ var clear = require('clear')(), // clear the console
     jsonfile = require('jsonfile'),
     argv = require('minimist')(process.argv.slice(2)),
     testMode = argv.test || false,
-    fileNames = testMode ? ['quotes.test.json'] : [/*'quotes.brainyquote.raw.json',*/ 'quotes.goodreads.raw.json'],
+    fileNames = testMode ? ['quotes.test.json'] : ['quotes.brainyquote.raw.json', 'quotes.goodreads.raw.json'],
     folder = '../data/',
     gcloud = require('google-cloud'),
     language = gcloud.language,
@@ -94,6 +94,6 @@ function writeJSON()
     }
   }
 
-  jsonfile.writeFileSync(path, json, {spaces: 2})
+  jsonfile.writeFileSync(path, json)
   console.log('\nDone! ' + path)
 }
