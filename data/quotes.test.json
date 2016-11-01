@@ -1,76 +1,81 @@
 {
-  "name":"BrainyQuotes",
-  "count":17179,
-  "version":9,
-  "newdata":true,
-  "lastrunstatus":"partial",
-  "thisversionstatus":"success",
-  "thisversionrun":"Mon Oct 17 2016 20:35:45 GMT+0000 (UTC)",
+  "name":"TestQuotes",
   "results":
   {
     "quotes":
     [
       {
-        "text":"Although I still have a long way to go, I would like to become the pride of Rain. When another Asian artist enters the U.S. rain, I would like him to think, 'There was an artist called Rain who succeeded in the U.S. market.",
+        "text":"Let's face it: a face is a face",
+        "query":"face",
+        "author":"Oscar Wilde",
+        "testCase": "testing VERB - NOUN, 'a' replacement and colon replacement"
+      },
+      {
+        "text":"Faced with his own face, he fainted.",
+        "query":"face",
+        "author":"Oscar Wilde",
+        "testCase": "testing VERB - NOUN and comma replacement"
+      },
+      {
+        "text":"Although I still have a long way to go, I would like to become the pride of Rain. When another Asian artist enters the U.S. rain, I would like him to think: 'There was an artist called Rain who succeeded in the U.S. market.'",
         "query":"rain",
+        "author":"Oscar Wilde",
         "testCase": "testing sentence split"
       },
       {
-        "text":"If you keep your face to the sunshine, you cannot see a shadow.",
-        "query":"face",
-        "testCase": "testing comma replacement with lower single quote"
-      },
-      {
-        "text":"Talk of joy: there may be things better than home-made face - there may be.",
-        "testCase": "testing colon replacement"
-      },
-      {
-        "text":"A face is a face",
-        "testCase": "testing 'a' replacement"
-      },
-      {
         "text":"Bona face is free of charge",
+        "author":"Oscar Wilde",
         "testCase": "testing 'a' replacement"
       },
       {
         "text":"An face is bigger than the sum of its parts",
+        "author":"Oscar Wilde",
         "testCase": "testing 'an' replacement"
       },
       {
         "text":"I never looked at fan face, for some reason",
+        "author":"Oscar Wilde",
         "testCase": "testing 'an' replacement"
       },
       {
         "text":"These faces are going to stay and last for a long time",
+        "author":"Oscar Wilde",
         "testCase": "testing plural replacement"
       },
       {
         "text":"Interfaces you know and faces you'd rather not...",
+        "author":"Oscar Wilde",
         "testCase": "testing plural replacement"
       },
       {
         "text":"Where the hell is your face?\" She shouts.",
+        "author":"Oscar Wilde",
         "testCase": "testing double-quotes"
       },
       {
         "text":"I seem to have a lot of crossroads.",
+        "author":"Oscar Wilde",
         "testCase": "testing bah"
       },
       {
         "text":"This piece was too small for face‚ but it was just right for me.' \nBran laughed a little unsteadly. 'Mel.",
+        "author":"Oscar Wilde",
         "testCase": "testing single quotes"
       },
       {
         "text":"I studied at UC Face Cruz before going on to do a grad program at UCLA.",
+        "author":"Oscar Wilde",
         "testCase": "testing capital"
       },
       {
         "text":"All people should “learn” to say \"No\" as an answer not only \"Yes\"",
+        "author":"Oscar Wilde",
         "testCase": "testing datat",
         "query":"no"
       },
       {
         "text":"I was told that when I'm dancing‚ I give off the feeling of a rainy day",
+        "author":"Oscar Wilde",
         "query":"rain",
         "testCase": "testing datay"
       }
