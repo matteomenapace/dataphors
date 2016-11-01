@@ -1,4 +1,5 @@
-var jsonfile = require('jsonfile'),
+var clear = require('clear')(), // clear the console
+    jsonfile = require('jsonfile'),
     folder = '../data/',
     emojisMap = jsonfile.readFileSync(folder + 'emojis.map.curated.json'),
     quotesMap = jsonfile.readFileSync(folder + 'quotes.map.json'),
