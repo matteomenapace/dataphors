@@ -128,10 +128,10 @@ function generateMisquote(quote)
 
       console.log(quote.query + ' found at ' + index + ' > ' + pos)
 
-      // don't replace query if it's not a NOUN
-      // if (pos !== 'NOUN')  
       // don't replace query if it's a VERB
-      if (pos == 'VERB')
+      // if (pos == 'VERB')
+      // don't replace query if it's not a NOUN
+      if (pos !== 'NOUN')  
       {
         misquote += quote.text.substring(lastIndex, index + quote.query.length)
       }
