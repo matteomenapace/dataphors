@@ -123,18 +123,22 @@ function generateMisquote(quote)
     {
       var index = match.index,
           token = quote.tokens[index],
+          text = (token) ? token.text : undefined,
           pos = (token) ? token.pos : undefined
 
       console.log(quote.query + ' found at ' + index + ' > ' + pos)
 
-      // don't replace query if it'a VERB
+      // don't replace query if it's not a NOUN
+      // if (pos !== 'NOUN')  
+      // don't replace query if it's a VERB
       if (pos == 'VERB')
       {
         misquote += quote.text.substring(lastIndex, index + quote.query.length)
       }
       else
       {
-        misquote += quote.text.substring(lastIndex, index) + 'data'
+        var data = isSentenceCase(text) ? 'Data' : 'data'
+        misquote += quote.text.substring(lastIndex, index) + data
       } 
       // update lastIndex
       lastIndex = index + quote.query.length
@@ -159,9 +163,15 @@ function generateMisquote(quote)
   misquote = misquote.trim()
   misquote = toSentenceCase(misquote)
 
-  // console.log(misquote)
+  console.log(misquote)
 
   return misquote
+}
+
+function isSentenceCase(string)
+{
+  if (!string) return false
+  return (string[0].toUpperCase() === string[0])
 }
 
 function toSentenceCase(string)

@@ -5,7 +5,7 @@
     "quotes":
     [
       {
-        "text":"Let's face it: a face is a face",
+        "text":"Let's face it: the Face is just another face",
         "query":"face",
         "author":"Oscar Wilde",
         "testCase": "testing VERB - NOUN, 'a' replacement and colon replacement"
